@@ -176,7 +176,7 @@ const Shop = () => {
           })}
         </div>
 
-        <div className="p-10 w-96 h-2/5 bg-white rounded-xl -mt-5">
+        <div className="p-10 w-96 h-2/5 bg-white rounded-xl mt-5">
           <h2 className="text-4xl font-bold mb-6 text-red-500">
             Your Cart ({cart.length})
           </h2>
