@@ -14,8 +14,8 @@ import remove from "./assets/remove.svg";
 
 const Shop = () => {
   const [cart, setCart] = useState([]);
-  const [orderConfirmed, setOrderConfirmed] = useState(false); // State to handle order confirmation
-  const [showModal, setShowModal] = useState(false); // New state to show/hide the modal
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const items = [
     {
@@ -94,33 +94,29 @@ const Shop = () => {
       item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
     );
 
-    // Remove item if the quantity becomes 0
     setCart(updatedCart.filter((item) => item.quantity > 0));
   };
 
-  // Function to completely remove an item from the cart
   const removeFromCart = (itemName) => {
     setCart(cart.filter((item) => item.name !== itemName));
   };
 
-  // Function to calculate the total price of items in the cart
   const calculateTotal = () => {
     return cart
       .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2); // Two decimal places
+      .toFixed(2);
   };
 
-  // Handle order confirmation
   const handleConfirmOrder = () => {
     if (cart.length > 0) {
-      setOrderConfirmed(true); // Set the confirmation state to true
-      setCart([]); // Clear the cart
+      setOrderConfirmed(true);
       setShowModal(true);
     }
   };
 
   const closeModal = () => {
-    setShowModal(false); // Close the modal
+    setShowModal(false);
+    setCart([]);
   };
 
   return (
@@ -206,7 +202,6 @@ const Shop = () => {
                         {item.price.toFixed(2)}
                       </span>
                     </div>
-                    {/* X button for removing an item */}
                     <img
                       src={remove}
                       onClick={() => removeFromCart(item.name)}
@@ -216,7 +211,6 @@ const Shop = () => {
                 ))}
               </ul>
 
-              {/* Order Total Section */}
               <div className="mt-6 mb-10">
                 <hr className="border-gray-300 mb-4" />
                 <div className="flex justify-between text-xl font-semibold text-gray-700">
@@ -226,7 +220,6 @@ const Shop = () => {
               </div>
 
               <div className="flex flex-col items-center m-20">
-                {/* Confirm Order Button */}
                 <button
                   onClick={handleConfirmOrder}
                   className="w-80 px-3 py-3 -mt-10 bg-red-600 text-white rounded-3xl hover:bg-red-800"
@@ -239,36 +232,35 @@ const Shop = () => {
         </div>
       </div>
 
-      {/* Order Confirmed Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-green-500">
+              <h2 className="text-3xl font-bold text-green-500">
                 Order Confirmed
               </h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-base text-gray-500">
                 We hope you enjoy your food!
               </p>
             </div>
 
             <div className="space-y-4">
               {cart.map((item, index) => (
-                <div key={index} className="flex justify-between items-center">
+                <div key={index} className="flex justify-between items-center text-left">
                   <img
                     src={item.imgSrc}
                     alt={item.name}
                     className="w-12 h-12 rounded-lg"
                   />
-                  <span>{item.name}</span>
-                  <span className="font-bold">{item.quantity}x</span>
+                    <span className="font-bold">{item.name}</span>
+                    <span className="font-bold">{item.quantity}x</span>
                   <span>${item.price.toFixed(2)}</span>
                 </div>
               ))}
             </div>
 
             <div className="text-center mt-6">
-              <h3 className="text-lg font-bold">Total: ${calculateTotal()}</h3>
+              <h3 className="text-lg font-bold">Order Total: ${calculateTotal()}</h3>
             </div>
 
             <div className="flex justify-center mt-6">
