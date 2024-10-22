@@ -219,6 +219,10 @@ const Shop = () => {
                 </div>
               </div>
 
+              <div className="flex justify-center items-center -mt-5 -mb-5">
+                <p className="bg-red-100 p-4 px-12 rounded-lg text-sm">This is a <span className="font-bold">carbon-neutral</span> delivery.</p>
+              </div>
+
               <div className="flex flex-col items-center m-20">
                 <button
                   onClick={handleConfirmOrder}
